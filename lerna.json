@@ -9,7 +9,7 @@
         "*.md"
       ],
       "message": "chore(release): publish",
-      "registry": "https://github.com/Nickynodejs/mini-ui.git/"
+      "registry": "https://npm.pkg.github.com"
     }
   },
   "version": "0.0.6",
