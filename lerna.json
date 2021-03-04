@@ -12,7 +12,7 @@
       "registry": "https://github.com/Nickynodejs/mini-ui.git/"
     }
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "npmClient": "yarn",
   "useWorkspaces": true
 }
