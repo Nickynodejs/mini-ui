@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "miniapp_ui",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "application component based on taro",
   "license": "MIT",
   "workspaces": {
