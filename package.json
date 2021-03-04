@@ -1,34 +1,21 @@
 {
+  "private": true,
   "name": "miniapp_ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "application component based on taro",
-  "module": "lib/index.esm.js",
-  "main": "lib/index.js",
-  "source": "packages/index.ts",
   "license": "MIT",
-  "scripts": {
-    "build": "yarn run rollup -c",
-    "start": "yarn run rollup -c -w"
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
   },
-  "dependencies": {
-    "clsx": "^1.1.1"
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
   },
   "devDependencies": {
-    "@rollup/plugin-json": "^4.1.0",
-    "@tarojs/components": "^3.1.1",
-    "@tarojs/react": "^3.1.1",
-    "@tarojs/taro": "^3.1.1",
-    "@types/node": "^14.14.31",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "lerna": "^4.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "rollup": "^2.40.0",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "typescript": "^4.2.2"
+    "lerna": "^4.0.0"
   }
 }
