@@ -6,7 +6,7 @@
     "publish": {
       "ignoreChanges": ["ignored-file", "*.md"],
       "message": "chore(release): publish",
-      "registry": "https://github.com/Nickynodejs/mini-ui.git"
+      "registry": "https://npm.pkg.github.com"
     },
     "bootstrap": {
       "ignore": "component-*",
