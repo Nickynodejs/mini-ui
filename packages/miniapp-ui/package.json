@@ -6,11 +6,6 @@
   "main": "lib/index.js",
   "source": "./index.ts",
   "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/*"
-    ]
-  },
   "publishConfig": {
     "access": "public"
   },

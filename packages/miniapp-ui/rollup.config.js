@@ -8,7 +8,9 @@ import Package from "./package.json";
 const resolveFile = (path) => Path.resolve(__dirname, ".", path);
 
 const config = {
+  //入口
   input: resolveFile(Package.source),
+  //出口
   output: [
     {
       file: resolveFile(Package.main),
@@ -21,6 +23,7 @@ const config = {
       sourcemap: true,
     },
   ],
+  //打包时剔除这些
   external: [
     "react",
     "react-dom",

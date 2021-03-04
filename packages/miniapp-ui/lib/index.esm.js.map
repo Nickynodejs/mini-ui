@@ -1,0 +1,1 @@
+{"version":3,"file":"index.esm.js","sources":["../components/Demo/index.tsx"],"sourcesContent":["import React from 'react'\r\nimport {View} from \"@tarojs/components\";\r\n\r\nconst Demo = () => {\r\n    return(\r\n        <View>11111</View>\r\n    )\r\n}\r\n\r\nexport default Demo;\r\n"],"names":[],"mappings":";;;MAGM,IAAI,GAAG;IACT,QACI,oBAAC,IAAI,gBAAa,EACrB;AACL;;;;"}
