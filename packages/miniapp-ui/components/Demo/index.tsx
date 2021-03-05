@@ -1,9 +1,14 @@
 import React from 'react'
 import {View} from "@tarojs/components";
+import "./index.less"
 
 const Demo = () => {
     return(
-        <View>11111222</View>
+        <View className="demo">
+          <View className="demo-text">
+            11111222
+          </View>
+        </View>
     )
 }
 

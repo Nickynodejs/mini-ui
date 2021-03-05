@@ -1,17 +1,2 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var React = require('react');
-var components = require('@tarojs/components');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
-
-const Demo = () => {
-    return (React__default['default'].createElement(components.View, null, "11111"));
-};
-
-exports.Demo = Demo;
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e=require("react"),t=require("@tarojs/components");function r(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var a=r(e);exports.Demo=()=>a.default.createElement(t.View,{className:"demo"},a.default.createElement(t.View,{className:"demo-text"},"11111222"));
 //# sourceMappingURL=index.js.map
