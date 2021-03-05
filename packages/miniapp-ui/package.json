@@ -16,8 +16,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn run rollup -c",
-    "start": "yarn run rollup -c -w"
+    "build": "yarn run rollup -c"
   },
   "dependencies": {
     "clsx": "^1.1.1",
