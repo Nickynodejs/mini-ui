@@ -9,7 +9,6 @@ import { terser } from 'rollup-plugin-terser'
 import nested from 'postcss-nested'
 import postcssPresetEnv from 'postcss-preset-env'
 import cssnano from 'cssnano'
-import postcssModules from 'postcss-modules'
 import Package from './package.json'
 
 const resolveFile = path => Path.resolve(__dirname, '.', path)
@@ -53,7 +52,7 @@ const config = {
           }
         ]
       ],
-      extract: 'bundle.css'
+      inject: true
     }),
     RollupPluginNodeResolve({
       customResolveOptions: {
