@@ -42,8 +42,8 @@ const config = {
   plugins: [
     RollupPluginImage(),
     postcss({
-      plugins: [nested(), postcssPresetEnv(), cssnano(), postcssModules()],
-      modules: true,
+      plugins: [nested(), postcssPresetEnv(), cssnano()],
+      modules: false,
       extensions: ['.css', '.less'],
       use: [
         [
