@@ -13,7 +13,8 @@
     "access": "public"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "publish": "lerna publish from-git --yes"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.1.0",
