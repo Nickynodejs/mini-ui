@@ -6,6 +6,12 @@
   "main": "lib/index.js",
   "source": "./index.ts",
   "license": "MIT",
+  "files": [
+    "lib",
+    "types",
+    "src/**/interface.ts",
+    "src/**/*.d.ts"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -29,7 +35,6 @@
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "cssnano": "^4.1.10",
-    "lerna": "^4.0.0",
     "postcss": "^8.2.7",
     "postcss-nested": "^5.0.4",
     "postcss-preset-env": "^6.7.0",
