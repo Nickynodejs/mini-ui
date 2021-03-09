@@ -17,7 +17,6 @@ import path from "path";
 const resolveFile = path => Path.resolve(__dirname, '.', path)
 const externalPkg =  [
   'react',
-  'style-inject',
   'react-dom',
   '@tarojs/taro',
   '@tarojs/react',
