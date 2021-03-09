@@ -1,72 +1,76 @@
 import Path from 'path'
 import RollupPluginNodeResolve from 'rollup-plugin-node-resolve'
+import babel from 'rollup-plugin-babel';
 import RollupPluginCommonjs from 'rollup-plugin-commonjs'
 import RollupPluginTypescript from 'rollup-plugin-typescript2'
 import RollupPluginJson from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss'
+import RollPostcssInject2Css from 'rollup-plugin-postcss-inject-to-css'
 import RollupPluginImage from '@rollup/plugin-image'
 import { terser } from 'rollup-plugin-terser'
 import nested from 'postcss-nested'
 import postcssPresetEnv from 'postcss-preset-env'
 import cssnano from 'cssnano'
 import Package from './package.json'
+import path from "path";
 
 const resolveFile = path => Path.resolve(__dirname, '.', path)
-const extensions = ['.js', '.jsx', '.ts', '.tsx', 'css', '.less']
+const externalPkg =  [
+  'react',
+  'clsx',
+  'tslib',
+  'style-inject',
+  'react-dom',
+  '@tarojs/taro',
+  '@tarojs/react',
+  '@tarojs/components',
+  '@tarojs/runtime'
+]
+const external = id => externalPkg.some(e => id.indexOf(e) === 0)
 const config = {
+
   //入口
-  input: resolveFile(Package.source),
+  input: "src/index.ts",
   //出口
-  output: [
+  output:
     {
-      file: resolveFile(Package.main),
-      format: 'cjs',
-      sourcemap: true
-    },
-    {
-      file: resolveFile(Package.module),
       format: 'es',
-      sourcemap: true
+      dir: "lib/es",
+      preserveModules: true,
+      preserveModulesRoot: 'src',
+      assetFileNames: ({name}) => {
+        console.log(name)
+        const {ext, dir, base} = Path.parse(name);
+        if (ext !== '.css') return '[name].[ext]';
+        // 规范 style 的输出格式
+        return Path.join(dir, 'style', base);
+      }
     }
-  ],
+  ,
   //打包时剔除这些
-  external: [
-    'react',
-    'react-dom',
-    '@tarojs/taro',
-    '@tarojs/react',
-    '@tarojs/components',
-    '@tarojs/runtime'
-  ],
+  external,
   plugins: [
     RollupPluginImage(),
     postcss({
-      plugins: [nested(), postcssPresetEnv(), cssnano()],
-      modules: false,
-      extensions: ['.css', '.less'],
-      use: [
-        [
-          'less',
-          {
-            javascriptEnabled: true
-          }
-        ]
-      ],
-      inject: true
+      inject: true,
+      extensions: ['.css', 'less'],
     }),
+    RollPostcssInject2Css({ exclude: /\/node_modules\//}),
     RollupPluginNodeResolve({
       customResolveOptions: {
         moduleDirectory: 'node_modules'
-      },
-      extensions
+      }
     }),
-    RollupPluginCommonjs({
-      include: /\/node_modules\//
-    }),
+    RollupPluginCommonjs(),
     RollupPluginJson(),
+    babel({
+      exclude: 'node_modules/**',
+      runtimeHelpers: 'runtime'// 只编译源代码
+    }),
     RollupPluginTypescript({
       tsconfig: resolveFile('./tsconfig.json')
     }),
+
     terser()
   ]
 }
