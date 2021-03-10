@@ -1,2 +1,2 @@
-export { default as Demo } from './Demo'
-export { default as Switch } from './Switch'
+export { default as Demo } from './demo'
+export { default as Switch } from './switch'

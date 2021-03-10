@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/components/Demo/index.less"],"names":[],"mappings":"AACE;EACE,eAAA;AAAJ","file":"index.css","sourcesContent":[".demo{\n  &-text{\n    font-size: 40px;\n  }\n}\n"]}
