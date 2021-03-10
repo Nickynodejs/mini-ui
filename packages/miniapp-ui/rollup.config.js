@@ -40,9 +40,9 @@ const config = {
   //出口
   output: {
     format: 'es',
-    dir: 'lib/es',
+    dir: 'lib',
     preserveModules: true,
-    preserveModulesRoot: 'src',
+    preserveModulesRoot: 'src/components',
     assetFileNames: ({ name }) => {
       console.log(name)
       const { ext, dir, base } = path.parse(name)
