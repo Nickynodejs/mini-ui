@@ -36,7 +36,7 @@ const externalPkg = [
 const external = id => externalPkg.some(e => id.indexOf(e) === 0)
 const config = {
   //入口
-  input: ['src/index.ts', ...componentEntryFiles],
+  input: ['src/components/index.ts', ...componentEntryFiles],
   //出口
   output: {
     format: 'es',
