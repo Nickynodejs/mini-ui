@@ -55,7 +55,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "lib/**/style/*",
+    "lib/es/**/*.css",
     "*.less"
   ],
   "gitHead": "b91a1958e554d2a2046a754c5a3fe22d2b30b97c"
