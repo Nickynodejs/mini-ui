@@ -1,6 +1,6 @@
 {
   "name": "miniapp_ui",
-  "version": "0.0.30",
+  "version": "0.0.32",
   "description": "application component based on taro",
   "main": "lib/es/components/index.js",
   "license": "MIT",
