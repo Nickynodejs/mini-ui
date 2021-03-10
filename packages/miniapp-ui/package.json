@@ -53,7 +53,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "lib/es/**/*.css",
+    "lib/es/components/**/*.css",
     "*.less"
   ],
   "gitHead": "b91a1958e554d2a2046a754c5a3fe22d2b30b97c"
