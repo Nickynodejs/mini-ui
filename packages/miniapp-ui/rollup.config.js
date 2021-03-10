@@ -1,6 +1,7 @@
-import Path from 'path'
+import path from 'path'
+import fs from 'fs'
 import RollupPluginNodeResolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel';
+import babel from 'rollup-plugin-babel'
 import RollupPluginCommonjs from 'rollup-plugin-commonjs'
 import RollupPluginTypescript from 'rollup-plugin-typescript2'
 import RollupPluginJson from '@rollup/plugin-json'
@@ -8,14 +9,21 @@ import postcss from 'rollup-plugin-postcss'
 import RollPostcssInject2Css from 'rollup-plugin-postcss-inject-to-css'
 import RollupPluginImage from '@rollup/plugin-image'
 import { terser } from 'rollup-plugin-terser'
+import RollupPluginStyles from 'rollup-plugin-styles'
 import nested from 'postcss-nested'
 import postcssPresetEnv from 'postcss-preset-env'
 import cssnano from 'cssnano'
 import Package from './package.json'
-import path from "path";
 
-const resolveFile = path => Path.resolve(__dirname, '.', path)
-const externalPkg =  [
+const componentDir = 'src/components'
+const cModuleNames = fs.readdirSync(path.resolve(componentDir))
+const componentEntryFiles = cModuleNames
+  .map(name =>
+    /^[A-Z]\w*/.test(name) ? `${componentDir}/${name}/index.tsx` : undefined
+  )
+  .filter(n => !!n)
+const resolveFile = p => path.resolve(__dirname, '.', p)
+const externalPkg = [
   'react',
   'clsx',
   'tslib',
@@ -27,34 +35,44 @@ const externalPkg =  [
 ]
 const external = id => externalPkg.some(e => id.indexOf(e) === 0)
 const config = {
-
   //入口
-  input: "src/index.ts",
+  input: ['src/index.ts', ...componentEntryFiles],
   //出口
-  output:
-    {
-      format: 'es',
-      dir: "lib/es",
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      assetFileNames: ({name}) => {
-        console.log(name)
-        const {ext, dir, base} = Path.parse(name);
-        if (ext !== '.css') return '[name].[ext]';
-        // 规范 style 的输出格式
-        return Path.join(dir, 'style', base);
-      }
+  output: {
+    format: 'es',
+    dir: 'lib/es',
+    preserveModules: true,
+    preserveModulesRoot: 'src',
+    assetFileNames: ({ name }) => {
+      console.log(name)
+      const { ext, dir, base } = path.parse(name)
+      if (ext !== '.css') return '[name].[ext]'
+      // 规范 style 的输出格式
+      return path.join(dir, 'style', base)
     }
-  ,
+  },
+  preserveModules: true,
   //打包时剔除这些
   external,
   plugins: [
     RollupPluginImage(),
-    postcss({
-      inject: true,
-      extensions: ['.css', 'less'],
+    RollupPluginStyles({
+      mode: 'extract',
+      less: { javascriptEnabled: true },
+      extensions: ['.less', '.css'],
+      minimize: false,
+      use: ['less'],
+      url: {
+        inline: true
+      },
+      sourceMap: true,
+      onExtract(data) {
+        const { css, name, map } = data
+        const { base } = path.parse(name)
+        if (base !== 'index.css') return false
+        return true
+      }
     }),
-    RollPostcssInject2Css({ exclude: /\/node_modules\//}),
     RollupPluginNodeResolve({
       customResolveOptions: {
         moduleDirectory: 'node_modules'
@@ -64,7 +82,7 @@ const config = {
     RollupPluginJson(),
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: 'runtime'// 只编译源代码
+      runtimeHelpers: 'runtime' // 只编译源代码
     }),
     RollupPluginTypescript({
       tsconfig: resolveFile('./tsconfig.json')

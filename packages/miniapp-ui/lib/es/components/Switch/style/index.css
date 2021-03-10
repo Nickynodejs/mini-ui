@@ -1,0 +1,37 @@
+.zc-switch {
+  position: relative;
+  display: inline-block;
+  box-sizing: content-box;
+  width: 80px;
+  height: 40px;
+  font-size: 30px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.zc-switch.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.zc-switch-checked {
+  background-color: #5caaf8;
+}
+.zc-switch-checked .zc-switch-box {
+  transform: translateX(40px);
+}
+.zc-switch-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.1), 1px 2px 2px 1px rgba(0, 0, 0, 0.1), 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s cubic-bezier(0.3, 1.05, 0.4, 1.05);
+}
+
+/*# sourceMappingURL=index.css.map */
