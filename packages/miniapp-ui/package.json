@@ -6,15 +6,6 @@
   "main": "lib/es/index.js",
   "source": "./index.ts",
   "license": "MIT",
-  "files": [
-    "lib",
-    "types",
-    "src/**/interface.ts",
-    "src/**/*.d.ts"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "build": "yarn run rollup -c"
   },
@@ -54,5 +45,18 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.2.2"
   },
+  "files": [
+    "lib",
+    "types",
+    "src/**/interface.ts",
+    "src/**/*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "lib/**/style/*",
+    "*.less"
+  ],
   "gitHead": "b91a1958e554d2a2046a754c5a3fe22d2b30b97c"
 }
