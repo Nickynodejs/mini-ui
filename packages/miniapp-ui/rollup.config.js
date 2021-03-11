@@ -1,19 +1,15 @@
 import path from 'path'
 import fs from 'fs'
 import RollupPluginNodeResolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
+import RollupPluginBabel from 'rollup-plugin-babel'
 import RollupPluginCommonjs from 'rollup-plugin-commonjs'
 import RollupPluginTypescript from 'rollup-plugin-typescript2'
 import RollupPluginJson from '@rollup/plugin-json'
-import postcss from 'rollup-plugin-postcss'
-import RollPostcssInject2Css from 'rollup-plugin-postcss-inject-to-css'
 import RollupPluginImage from '@rollup/plugin-image'
-import { terser } from 'rollup-plugin-terser'
 import RollupPluginStyles from 'rollup-plugin-styles'
-import nested from 'postcss-nested'
-import postcssPresetEnv from 'postcss-preset-env'
-import cssnano from 'cssnano'
-import Package from './package.json'
+import RollupPluginCopy from 'rollup-plugin-copy'
+import { terser } from 'rollup-plugin-terser'
+
 
 const componentDir = 'src/components'
 const cModuleNames = fs.readdirSync(path.resolve(componentDir))
@@ -48,7 +44,7 @@ const config = {
       const { ext, dir, base } = path.parse(name)
       if (ext !== '.css') return '[name].[ext]'
       // 规范 style 的输出格式
-      return path.join(dir, 'style', base)
+      return path.join(dir, 'styles', base)
     }
   },
   preserveModules: true,
@@ -80,14 +76,23 @@ const config = {
     }),
     RollupPluginCommonjs(),
     RollupPluginJson(),
-    babel({
+    RollupPluginBabel({
       exclude: 'node_modules/**',
       runtimeHelpers: 'runtime' // 只编译源代码
     }),
     RollupPluginTypescript({
-      tsconfig: resolveFile('./tsconfig.json')
+      tsconfig: resolveFile('./tsconfig.json'),
+      useTsconfigDeclarationDir: false,
     }),
-
+    RollupPluginCopy({
+      targets: [
+        {
+          src: "src/components/style",
+          dest: "lib",
+          rename: "theme"
+        }
+      ]
+    }),
     terser()
   ]
 }

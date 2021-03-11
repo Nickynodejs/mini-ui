@@ -15,9 +15,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "build:component": "lerna run --scope miniapp-ui build",
+    "build:component": "lerna run --scope miniapp_ui build",
     "clean": "lerna run clean",
-    "clean:component": "lerna run --scope miniapp-ui clean",
+    "clean:component": "lerna run --scope miniapp_ui clean",
     "publish": "lerna publish"
   },
   "devDependencies": {
