@@ -10,7 +10,6 @@ import RollupPluginStyles from 'rollup-plugin-styles'
 import RollupPluginCopy from 'rollup-plugin-copy'
 import { terser } from 'rollup-plugin-terser'
 
-
 const componentDir = 'src/components'
 const cModuleNames = fs.readdirSync(path.resolve(componentDir))
 const componentEntryFiles = cModuleNames
@@ -69,30 +68,37 @@ const config = {
         return true
       }
     }),
+    // 引入依赖
     RollupPluginNodeResolve({
       customResolveOptions: {
         moduleDirectory: 'node_modules'
       }
     }),
+    // CommonJS转换
     RollupPluginCommonjs(),
+    // 调用外部json
     RollupPluginJson(),
+    // 生成声明文件
+    RollupPluginTypescript({
+      tsconfig: resolveFile('./tsconfig.json'),
+      useTsconfigDeclarationDir: false
+    }),
+    // balel
     RollupPluginBabel({
       exclude: 'node_modules/**',
       runtimeHelpers: 'runtime' // 只编译源代码
     }),
-    RollupPluginTypescript({
-      tsconfig: resolveFile('./tsconfig.json'),
-      useTsconfigDeclarationDir: false,
-    }),
+    // 复制重命名
     RollupPluginCopy({
       targets: [
         {
-          src: "src/components/style",
-          dest: "lib",
-          rename: "theme"
+          src: 'src/components/style',
+          dest: 'lib',
+          rename: 'theme'
         }
       ]
     }),
+    // 压缩
     terser()
   ]
 }
